@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id Int @id @default(autoincrement())
+  namaLengkap String @unique
+  email String
+  noTelepon String
+  jenisKelamin JK
+  password String
+  role Role @default(user)
+  monitorng Monitoring[]
+}
+
+enum JK {
+  perempuan
+  lakiLaki
+}
+
+enum Role {
+  admin
+  user
+}
+
+model returSp2d{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  alasanRetur Retur
+  unggah_dokumen String
+  monitoring Monitoring[]
+}
+
+enum Retur{
+  REKENING_TIDAK_AKTIF
+  REKENING_PASIF
+  NOMOR_REKENING_SALAH
+}
+
+model penerbitanBukti{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  alasanRetur Pengajuan
+  unggah_dokumen String
+  monitoring Monitoring[]
+}
+
+enum Pengajuan{
+  REKENING_TIDAK_AKTIF
+  REKENING_PASIF
+  NOMOR_REKENING_SALAH
+}
+
+model penerbitanNota{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  tahunSteoran Tahun
+  unggahDokumen String
+  monitoring Monitoring[]
+}
+
+enum Tahun{
+  T2025
+  T2024
+}
+
+model pengajuanNota{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  tahunSteoran Tahun
+  unggahDokumem String
+  monitoring Monitoring[]
+}
+
+model koreksiPenerimaan{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  tahunSteoran Tahun
+  unggahDokumem String
+  monitoring Monitoring[]
+}
+
+
+model pengajuanVoid{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  alasanVoid String
+  unggahDokumen String
+  monitoring Monitoring[]
+}
+
+model pembukaanRekening{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  jenisRekening String
+  unggahDokumen String
+  monitoring Monitoring[]
+}
+
+model laporanRekening{
+  id Int @id @default(autoincrement())
+  kodeSatker Int
+  noTelpon String
+  jenisLaporan Laporan
+  unggahDokumen String
+  monitoring Monitoring[]
+}
+
+enum Laporan{
+  LAPORAN_PEMBUKAAN_REKENING
+  LAPORAN_PENTUPUAN_REKENING
+}
+
+model pengembalianPfk{
+  id Int @id @default(autoincrement())
+  pihakMengajukan PihakPengajuan
+  kodeSatker Int
+  noTelpon String
+  unggahDokumen String
+  monitoring Monitoring[]
+}
+
+enum PihakPengajuan{
+  satuan_kerja
+  pemerintah_daerah
+}
+
+model Monitoring {
+  id Int @id @default(autoincrement())
+  userId Int
+  returSp2dId Int
+  penerbitanBuktiId Int
+  penerbitanNotaId Int
+  pengajuanNotaId Int
+  koreksiPenerimaanId Int
+  pengajuanVoidId Int
+  pembukaanRekeningId Int
+  laporanRekeningId Int
+  pengembalianPfkId Int
+  status StatusMonitoring
+  user  user   @relation(fields: [userId], references: [id])
+  returSp2d  returSp2d   @relation(fields: [returSp2dId], references: [id])
+  penerbitanBukti  penerbitanBukti   @relation(fields: [penerbitanBuktiId], references: [id])
+  penerbitanNota  penerbitanNota   @relation(fields: [penerbitanNotaId], references: [id])
+  pengajuanNota  pengajuanNota  @relation(fields: [pengajuanNotaId], references: [id])
+  koreksiPenerimaan  koreksiPenerimaan  @relation(fields: [ koreksiPenerimaanId], references: [id])
+  pengajuanVoid  pengajuanVoid  @relation(fields: [pengajuanVoidId], references: [id])
+  pembukaanRekening  pembukaanRekening  @relation(fields: [pembukaanRekeningId], references: [id])
+  laporanRekening  laporanRekening  @relation(fields: [laporanRekeningId], references: [id])
+  pengembalianPfk   pengembalianPfk  @relation(fields: [pengembalianPfkId], references: [id])
+}
+
+enum StatusMonitoring{
+  DIPROSES
+  SELESAI
+  DITOLAK
+}
+
+
+
+
+
