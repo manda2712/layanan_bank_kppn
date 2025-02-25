@@ -20,3 +20,11 @@ app.use("/api/auth", userAuthController)
 //user
 const userController = require("./user/user.controller")
 app.use("/api/user", userController)
+
+//retur
+const returController = require("./returSp2d/returSp2d.controller")
+app.use("/api/retur", returController)
+
+//penerbitan Bukti
+const penerbitanController = require("./penerbitanBukti/penerbitanBukti.controller")
+app.use("/api/penerbitanBukti", penerbitanController)
