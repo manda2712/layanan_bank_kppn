@@ -28,3 +28,11 @@ app.use("/api/retur", returController)
 //penerbitan Bukti
 const penerbitanController = require("./penerbitanBukti/penerbitanBukti.controller")
 app.use("/api/penerbitanBukti", penerbitanController)
+
+//penerbitan Nota
+const penerbitanNotaController = require("./penerbitanNota/penerbitanNota.controller")
+app.use("/api/nota", penerbitanNotaController)
+
+//pengajuan Nota
+const pengajuanNotaController = require("./pengajuanNota/pengajuanNota.controller")
+app.use("/api/pengajuanNota", pengajuanNotaController)
