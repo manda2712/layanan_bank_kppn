@@ -34,8 +34,8 @@ const penerbitanNotaController = require("./penerbitanNota/penerbitanNota.contro
 app.use("/api/nota", penerbitanNotaController)
 
 //pengajuan Nota
-const pengajuanNotaController = require("./pengajuanNota/pengajuanNota.controller")
-app.use("/api/pengajuanNota", pengajuanNotaController)
+const pengembalianPnBpController = require("./pengembalianPnbp/pengembalianPnBp.controller")
+app.use("/api/pengembalianPnbp", pengembalianPnBpController)
 
 //penerimaan Koreksi
 const koreksiPenerimaanController = require("./koreksiPenerimaan/koreksiPenerimaan.controller")

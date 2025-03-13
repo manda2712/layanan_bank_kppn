@@ -92,7 +92,7 @@ model pengembalianPnbp {
   pihakMengajukan PihakPengajuan
   kodeSatker      Int
   noTelpon        String
-  unggahDokumem   String
+  unggahDokumen   String
   monitoring      Monitoring[]
 }
 
