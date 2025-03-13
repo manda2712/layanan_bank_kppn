@@ -14,14 +14,14 @@ datasource db {
 }
 
 model user {
-  id Int @id @default(autoincrement())
-  namaLengkap String @unique
-  email String
-  noTelepon String
+  id           Int          @id @default(autoincrement())
+  namaLengkap  String       @unique
+  email        String
+  noTelepon    String
   jenisKelamin JK
-  password String
-  role Role @default(user)
-  monitorng Monitoring[]
+  password     String
+  role         Role         @default(user)
+  monitorng    Monitoring[]
 }
 
 enum JK {
@@ -34,147 +34,150 @@ enum Role {
   user
 }
 
-model returSp2d{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  alasanRetur Retur
+model returSp2d {
+  id             Int          @id @default(autoincrement())
+  kodeSatker     Int
+  noTelpon       String
+  alasanRetur    Retur
   unggah_dokumen String
-  monitoring Monitoring[]
+  monitoring     Monitoring[]
 }
 
-enum Retur{
+enum Retur {
   REKENING_TIDAK_AKTIF
   REKENING_PASIF
   NOMOR_REKENING_SALAH
 }
 
-model penerbitanBukti{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  alasanRetur Pengajuan
+model penerbitanBukti {
+  id             Int          @id @default(autoincrement())
+  kodeSatker     Int
+  noTelpon       String
+  alasanRetur    Pengajuan
   unggah_dokumen String
-  monitoring Monitoring[]
+  monitoring     Monitoring[]
 }
 
-enum Pengajuan{
+enum Pengajuan {
   REKENING_TIDAK_AKTIF
   REKENING_PASIF
   NOMOR_REKENING_SALAH
 }
 
-model penerbitanNota{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  tahunSteoran Tahun
+model penerbitanNota {
+  id            Int          @id @default(autoincrement())
+  kodeSatker    Int
+  noTelpon      String
+  tahunSteoran  Tahun
   unggahDokumen String
-  monitoring Monitoring[]
+  monitoring    Monitoring[]
 }
 
-enum Tahun{
+enum Tahun {
   T2025
   T2024
 }
 
-model pengajuanNota{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  tahunSteoran Tahun
-  unggahDokumem String
-  monitoring Monitoring[]
+// model pengajuanNota {
+//   id            Int          @id @default(autoincrement())
+//   kodeSatker    Int
+//   noTelpon      String
+//   tahunSteoran  Tahun
+//   unggahDokumem String
+//   monitoring    Monitoring[]
+// }
+
+model pengembalianPnbp {
+  id              Int            @id @default(autoincrement())
+  pihakMengajukan PihakPengajuan
+  kodeSatker      Int
+  noTelpon        String
+  unggahDokumem   String
+  monitoring      Monitoring[]
 }
 
-model koreksiPenerimaan{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  tahunSteoran Tahun
+model koreksiPenerimaan {
+  id            Int          @id @default(autoincrement())
+  kodeSatker    Int
+  noTelpon      String
+  tahunSteoran  Tahun
   unggahDokumem String
-  monitoring Monitoring[]
+  monitoring    Monitoring[]
 }
 
-
-model pengajuanVoid{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  alasanVoid String
+model pengajuanVoid {
+  id            Int          @id @default(autoincrement())
+  kodeSatker    Int
+  noTelpon      String
+  alasanVoid    String
   unggahDokumen String
-  monitoring Monitoring[]
+  monitoring    Monitoring[]
 }
 
-model pembukaanRekening{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
+model pembukaanRekening {
+  id            Int          @id @default(autoincrement())
+  kodeSatker    Int
+  noTelpon      String
   jenisRekening String
   unggahDokumen String
-  monitoring Monitoring[]
+  monitoring    Monitoring[]
 }
 
-model laporanRekening{
-  id Int @id @default(autoincrement())
-  kodeSatker Int
-  noTelpon String
-  jenisLaporan Laporan
+model laporanRekening {
+  id            Int          @id @default(autoincrement())
+  kodeSatker    Int
+  noTelpon      String
+  jenisLaporan  Laporan
   unggahDokumen String
-  monitoring Monitoring[]
+  monitoring    Monitoring[]
 }
 
-enum Laporan{
+enum Laporan {
   LAPORAN_PEMBUKAAN_REKENING
   LAPORAN_PENTUPUAN_REKENING
 }
 
-model pengembalianPfk{
-  id Int @id @default(autoincrement())
+model pengembalianPfk {
+  id              Int            @id @default(autoincrement())
   pihakMengajukan PihakPengajuan
-  kodeSatker Int
-  noTelpon String
-  unggahDokumen String
-  monitoring Monitoring[]
+  kodeSatker      Int
+  noTelpon        String
+  unggahDokumen   String
+  monitoring      Monitoring[]
 }
 
-enum PihakPengajuan{
+enum PihakPengajuan {
   satuan_kerja
   pemerintah_daerah
 }
 
 model Monitoring {
-  id Int @id @default(autoincrement())
-  userId Int
-  returSp2dId Int
-  penerbitanBuktiId Int
-  penerbitanNotaId Int
-  pengajuanNotaId Int
+  id                  Int               @id @default(autoincrement())
+  userId              Int
+  returSp2dId         Int
+  penerbitanBuktiId   Int
+  penerbitanNotaId    Int
+  pengembalianPnbpId  Int
   koreksiPenerimaanId Int
-  pengajuanVoidId Int
+  pengajuanVoidId     Int
   pembukaanRekeningId Int
-  laporanRekeningId Int
-  pengembalianPfkId Int
-  status StatusMonitoring
-  user  user   @relation(fields: [userId], references: [id])
-  returSp2d  returSp2d   @relation(fields: [returSp2dId], references: [id])
-  penerbitanBukti  penerbitanBukti   @relation(fields: [penerbitanBuktiId], references: [id])
-  penerbitanNota  penerbitanNota   @relation(fields: [penerbitanNotaId], references: [id])
-  pengajuanNota  pengajuanNota  @relation(fields: [pengajuanNotaId], references: [id])
-  koreksiPenerimaan  koreksiPenerimaan  @relation(fields: [ koreksiPenerimaanId], references: [id])
-  pengajuanVoid  pengajuanVoid  @relation(fields: [pengajuanVoidId], references: [id])
-  pembukaanRekening  pembukaanRekening  @relation(fields: [pembukaanRekeningId], references: [id])
-  laporanRekening  laporanRekening  @relation(fields: [laporanRekeningId], references: [id])
-  pengembalianPfk   pengembalianPfk  @relation(fields: [pengembalianPfkId], references: [id])
+  laporanRekeningId   Int
+  pengembalianPfkId   Int
+  status              StatusMonitoring
+  user                user              @relation(fields: [userId], references: [id])
+  returSp2d           returSp2d         @relation(fields: [returSp2dId], references: [id])
+  penerbitanBukti     penerbitanBukti   @relation(fields: [penerbitanBuktiId], references: [id])
+  penerbitanNota      penerbitanNota    @relation(fields: [penerbitanNotaId], references: [id])
+  pengembalianPnbp    pengembalianPnbp  @relation(fields: [pengembalianPnbpId], references: [id])
+  koreksiPenerimaan   koreksiPenerimaan @relation(fields: [koreksiPenerimaanId], references: [id])
+  pengajuanVoid       pengajuanVoid     @relation(fields: [pengajuanVoidId], references: [id])
+  pembukaanRekening   pembukaanRekening @relation(fields: [pembukaanRekeningId], references: [id])
+  laporanRekening     laporanRekening   @relation(fields: [laporanRekeningId], references: [id])
+  pengembalianPfk     pengembalianPfk   @relation(fields: [pengembalianPfkId], references: [id])
 }
 
-enum StatusMonitoring{
+enum StatusMonitoring {
   DIPROSES
   SELESAI
   DITOLAK
 }
-
-
-
-
-

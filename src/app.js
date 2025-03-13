@@ -36,3 +36,15 @@ app.use("/api/nota", penerbitanNotaController)
 //pengajuan Nota
 const pengajuanNotaController = require("./pengajuanNota/pengajuanNota.controller")
 app.use("/api/pengajuanNota", pengajuanNotaController)
+
+//penerimaan Koreksi
+const koreksiPenerimaanController = require("./koreksiPenerimaan/koreksiPenerimaan.controller")
+app.use("/api/koreksiPenerimaan", koreksiPenerimaanController)
+
+//pengajuan Void
+const pengajuanVoidController = require("./pengajuanVoid/pengajuanVoid.controller")
+app.use("/api/pengajuanVoid", pengajuanVoidController)
+
+//pembukaan Rekening
+const pembukaanRekeningController = require("./pembukaanRekening/pembukaanRekening.controller")
+app.use("/api/pembukaanRekening", pembukaanRekeningController)

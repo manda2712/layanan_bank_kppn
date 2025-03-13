@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const userAuthRepository = require('./userAuth.repository')
-
 const bcrypt = require('bcrypt');
 
 async function register(namaLengkap, email, noTelepon, jenisKelamin, password) {
