@@ -78,15 +78,6 @@ enum Tahun {
   T2024
 }
 
-// model pengajuanNota {
-//   id            Int          @id @default(autoincrement())
-//   kodeSatker    Int
-//   noTelpon      String
-//   tahunSteoran  Tahun
-//   unggahDokumem String
-//   monitoring    Monitoring[]
-// }
-
 model pengembalianPnbp {
   id              Int            @id @default(autoincrement())
   pihakMengajukan PihakPengajuan

@@ -33,7 +33,7 @@ app.use("/api/penerbitanBukti", penerbitanController)
 const penerbitanNotaController = require("./penerbitanNota/penerbitanNota.controller")
 app.use("/api/nota", penerbitanNotaController)
 
-//pengajuan Nota
+//pengajuan pnpb
 const pengembalianPnBpController = require("./pengembalianPnbp/pengembalianPnBp.controller")
 app.use("/api/pengembalianPnbp", pengembalianPnBpController)
 
@@ -48,3 +48,7 @@ app.use("/api/pengajuanVoid", pengajuanVoidController)
 //pembukaan Rekening
 const pembukaanRekeningController = require("./pembukaanRekening/pembukaanRekening.controller")
 app.use("/api/pembukaanRekening", pembukaanRekeningController)
+
+//laporan Rekening
+const laporanRekeningController = require("./laporanRekening/laporanRekening.controller")
+app.use("/api/laporanRekening/", laporanRekeningController)
