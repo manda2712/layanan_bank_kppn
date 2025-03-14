@@ -1,13 +1,13 @@
 const express = require("express")
 const router = express.Router()
 
-const pengembalianPnBpService = require("./pengembalianPnBp.service")
+const pengembalianPnbpService = require("./pengembalianPnBp.service")
 
 
 router.post("/create", async (req, res) => {
     try {
         const pengembalianPnBp = req.body
-        const dataPnbp = await pengembalianPnBpService.createPengembalianPnbp(pengembalianPnBp)
+        const dataPnbp = await pengembalianPnbpService.createPengembalianPnbp(pengembalianPnBp)
         res.status(201).json({dataPnbp, message:"Berhasil dalam Mmembuat Pengembalian PNBP"})
     } catch (error) {
         res.status(400).send(error.message)   
@@ -16,7 +16,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/", async (req,res) => {
     try {
-        const pengembalianPnBp = await pengembalianPnBpService.getAllPengembalianPnbp()
+        const pengembalianPnBp = await pengembalianPnbpService.getAllPengembalianPnbp()
         res.send(pengembalianPnBp)
     } catch (error) {
         res.status(500).send(error.message)  
@@ -26,7 +26,7 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
     try {
         const pengembalianPnBpId = parseInt(req.params.id)
-        const pengembalianPnBp = await pengembalianPnBpService.getPengembalianPnbpById(pengembalianPnBpId)
+        const pengembalianPnBp = await pengembalianPnbpService.getPengembalianPnbpById(pengembalianPnBpId)
         res.status(200).json(pengembalianPnBp)
     } catch (error) {
         res.status(400).send(error.message)
@@ -37,7 +37,7 @@ router.patch("/:id", async (req, res) => {
     try {
         const pengembalianPnBpId = req.params.id
         const dataPnbp = req.body
-        const updatePengembalianPnbp = await pengembalianPnBpService(pengembalianPnBpId, dataPnbp) 
+        const updatePengembalianPnbp = await pengembalianPnbpService.editPengembalianPnbpById(pengembalianPnBpId, dataPnbp) 
         res.status(200).json({updatePengembalianPnbp, message:"berhasill"})
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -47,10 +47,12 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         const pengembalianPnBpId = req.params.id
-        await pengembalianPnBpService.deletePengembalianPnbpById(pengembalianPnBpId)
+        await pengembalianPnbpService.deletePengembalianPnbpById(pengembalianPnBpId)
         res.status(200).json({message:"Berhasil"})
     } catch (error) {
         res.status(400).send(error.message)  
     }
     
 })
+
+module.exports = router;

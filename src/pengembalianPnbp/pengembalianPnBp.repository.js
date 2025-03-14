@@ -47,7 +47,7 @@ async function editPengembalianPnbp(id, dataPnbp) {
         where:{
             id: parseInt(id)
         },
-        select:{
+        data:{
             pihakMengajukan : dataPnbp.pihakMengajukan,
             kodeSatker      : dataPnbp.kodeSatker,
             noTelpon        : dataPnbp.noTelpon,
